@@ -95,7 +95,8 @@ def pick_seed(image_vector, K):
     """
 
     centroids = np.zeros((K, image_vector.shape[2]))
-
+    for i in range(K):
+        centroids[i] = image_vector[0][i]
     return centroids
 
 def allocate_cluster(image_vector, centroids):
