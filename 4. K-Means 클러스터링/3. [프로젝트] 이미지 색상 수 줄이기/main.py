@@ -125,7 +125,16 @@ def recalc_centroids(image_vector, clusters, K):
     Cluster별로 새로운 centroid를 구해서 되돌려줍니다.
 
     """
+    for k in range(centroids.shape[0]):
+        x = image_vector[clusters == k][:,0]
+        y = image_vector[clusters == k][:,1]
+        z = image_vector[clusters == k][:,2]
 
+        x = np.mean(x)
+        y = np.mean(y)
+        z = np.mean(z)
+
+        centroids[k] = [x, y, z]
     return centroids
 
 def postprocess(image_vector):
