@@ -109,6 +109,13 @@ def allocate_cluster(image_vector, centroids):
     예를들어, 0행 0열의 pixel이 3번 Centroid에 가깝다면, clusters[0][0] = 3 이라고 채웁니다.
 
     """
+    for i in range(image_vector.shape[0]):
+        for k in range(image_vector.shape[1]):
+            distances = []
+            for z in range(centroids.shape[0]):
+                k_dist = distance(image_vector[i][k], centroids[z])
+                distances.append(k_dist)
+            clusters[i][k] = np.argmin(distances)
 
     return clusters
 
