@@ -57,6 +57,13 @@ def preprocess(image_vactor):
         image = image_vactor[i]
         data_equalized[i] = image_histogram_equalization(image)[0]
 
+    for i in range(data_equalized.shape[0]):
+        data_equalized[i][:,0] -= np.min(data_equalized[i][:,0])
+        data_equalized[i][:,0] /= np.max(data_equalized[i][:,0])
+        data_equalized[i][:,1] -= np.min(data_equalized[i][:,1])
+        data_equalized[i][:,1] /= np.max(data_equalized[i][:,1])
+        data_equalized[i][:,2] -= np.min(data_equalized[i][:,2])
+        data_equalized[i][:,2] /= np.max(data_equalized[i][:,2])
     return data_equalized
 
 def kmeans(image_vector, K = 32):
