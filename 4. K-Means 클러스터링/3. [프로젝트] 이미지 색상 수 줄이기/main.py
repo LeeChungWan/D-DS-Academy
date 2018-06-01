@@ -49,12 +49,12 @@ def image_histogram_equalization(image, number_bins=256):
     return image_equalized.reshape(image.shape), cdf
 
 # Histogram Equaliztion 단계
-def preprocess(image_vactor):
+def preprocess(image_vector):
 
-    data_equalized = np.zeros(image_vactor.shape)
+    data_equalized = np.zeros(image_vector.shape)
 
-    for i in range(image_vactor.shape[0]):
-        image = image_vactor[i]
+    for i in range(image_vector.shape[0]):
+        image = image_vector[i]
         data_equalized[i] = image_histogram_equalization(image)[0]
 
     for i in range(data_equalized.shape[0]):
@@ -64,6 +64,15 @@ def preprocess(image_vactor):
         data_equalized[i][:,1] /= np.max(data_equalized[i][:,1])
         data_equalized[i][:,2] -= np.min(data_equalized[i][:,2])
         data_equalized[i][:,2] /= np.max(data_equalized[i][:,2])
+    """
+    방법2
+    hist,bins=np.histogram(image_vector.flatten(),256,normed=True)
+    cdf=hist.cumsum()
+    cdf_m=np.ma.masked_equal(cdf,0)
+    cdf_m=(cdf_m-cdf_m.min())*255/(cdf_m.max()-cdf_m.min())
+    cdf=np.ma.filled(cdf_m,0)
+    data_equalized=cdf[image_vector]
+    """
     return data_equalized
 
 def kmeans(image_vector, K = 32):
