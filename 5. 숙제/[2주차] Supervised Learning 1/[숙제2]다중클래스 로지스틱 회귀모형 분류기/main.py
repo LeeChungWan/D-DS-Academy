@@ -11,7 +11,6 @@ def binary_classification(X, binary_label):
 	# input : X (features), shape:(number of samples, number of features)
 	# input : binary_label (1 or 0), shape:(number of samples, )
 	# output : probability to belong to that class, shape:(number of samples, )
-
     predicted_p = 0
     lrmodel = LogisticRegression()
     lrmodel.fit(X, binary_label)
@@ -21,7 +20,6 @@ def binary_classification(X, binary_label):
     pridicted_p = lrmodel.predict_proba(X)[:][:,1]
 
     return pridicted_p
-
 
 def multiclass_classification(X, y):
 	# input : X (features), shape:(number of samples, number of features)
@@ -60,7 +58,6 @@ def multiclass_classification(X, y):
         if total_label[100:150][i] == prob_2[100:150][i]:
             count += 1
     return count/len(y)
-
 
 def main():
     data = load_data()
